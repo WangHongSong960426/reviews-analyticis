@@ -8,24 +8,47 @@ with open('reviews.txt', 'r') as f:
             print(len(data))
 print('檔案讀取完了, 總共有', len(data), '筆資料')
 
-sum_len = 0
+wc = {}
 for d in data:
-    len(d)
-    sum_len += len(d)
-print('留言平均長度是', sum_len / len(data))
+    words = d.split()
+    for word in words:
+        if word in wc:
+            wc[word] += 1
+        else:
+            wc[word] = 1
 
-new = []
-for d in data:
-    if len(d) < 100:
-        new.append(d)
-print('一共有', len(new), '比留言長度小於100')
-print(new[0])
-print(new[1])
+for word in wc:
+    if wc[word] > 1000000:
+        print(word, wc[word])
+
+while True:
+    word = input('請問你想查甚麼字? ')
+    if word == 'q':
+        break
+    if word in wc:
+        print(word, '出現過的次數為: ', wc[word])
+    else:
+        print('沒出現過...')
 
 
-good = []
-for d in data:
-    if 'good' in d:
-        good.append(d)
-print('一共有', len(good), '筆留言提到good')
-print(good[0])
+# sum_len = 0
+# for d in data:
+#    len(d)
+#    sum_len += len(d)
+# print('留言平均長度是', sum_len / len(data))
+
+#new = []
+#for d in data:
+#    if len(d) < 100:
+#        new.append(d)
+#print('一共有', len(new), '比留言長度小於100')
+#print(new[0])
+#print(new[1])
+
+
+#good = []
+#for d in data:
+#    if 'good' in d:
+#        good.append(d)
+#print('一共有', len(good), '筆留言提到good')
+#print(good[0])
